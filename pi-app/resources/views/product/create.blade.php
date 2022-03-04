@@ -1,4 +1,4 @@
-<form action= "/product/create" method="POST">
+<form action= "{{route('product.store')}}" method="POST">
     @csrf
     Nome do produto: <input type="text" name="name">
     Descrição: <input type="text" name="description">
