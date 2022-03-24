@@ -46,4 +46,17 @@ class CategoryController extends Controller
         session()->flash('success', 'O produto foi apagado');
         return redirect(route('category.index'));
     }
+
+    public function trash(){
+
+        return view('category.trash')->with('categories', Category::onlyTrashed()->get());
+
+    }
+
+    public function restore($category_id){
+        $category = Category::onlyTrashed()->where('id', $category_id)->first();
+        $category->restore();
+        session()->flash('success', 'Categoria restaurado com sucesso');
+        return redirect(route('category.index'));
+    }
 }

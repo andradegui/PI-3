@@ -1,16 +1,33 @@
-<div>
-{{ session()->get('success')}}
+@extends('layouts.app')
 
-</div>
 
-<table>
+@section('content')
+<a class="btn btn-lg btn-success float-end me-5 mb-2" href="{{route('category.create')}}">Criar Categoria</a>
+
+<div class="container mt-3">
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome da Categoria</th>
+            <th>Quantidade</th>
+            <th>Editar</th>
+            <th>Apagar</th>
+        </tr>
+    </thead>
+    <tbody>
 @foreach($categories as $category)
 <tr>
 <td>{{$category->id}}</td>
 <td>{{$category->name}}</td>
+<td>{{$category->Products->count()}}</td>
 <td><a href="{{route('category.edit', $category->id)}}">Editar</a></td>
 <td><a href="{{route('category.destroy', $category->id)}}">Apagar</a></td>
 
 </tr>
 @endforeach
+    </tbody>
 </table>
+</div>
+@endsection

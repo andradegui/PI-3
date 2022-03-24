@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\TagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::middleware(['auth'])->group(function(){
 Route::get('/product/create', [ProductController::class,'create'])->name('product.create');
 Route::post('/product/create', [ProductController::class,'store'])->name('product.store');
 Route::get('/product/edit/{product}', [ProductController::class,'edit'])->name('product.edit');
@@ -34,4 +46,18 @@ Route::post('/category/create', [CategoryController::class,'store'])->name('cate
 Route::get('/category/edit/{category}', [CategoryController::class,'edit'])->name('category.edit');
 Route::put('/category/edit/{category}', [CategoryController::class,'update'])->name('category.update');
 Route::get('/category', [CategoryController::class,'index'])->name('category.index');
+Route::get('/category/trash', [CategoryController::class,'trash'])->name('category.trash');
+Route::get('/category/trash/restore/{category}', [CategoryController::class,'restore'])->name('category.restore');
 Route::get('/category/destroy/{category}', [CategoryController::class,'destroy'])->name('category.destroy');
+
+Route::get('/tag', [TagController::class, 'index'])->name('tag.index');
+Route::get('/tag/create', [TagController::class, 'create'])->name('tag.create');
+Route::post('/tag/create', [TagController::class, 'store'])->name('tag.store');
+Route::get('/tag/edit/{tag}', [TagController::class, 'edit'])->name('tag.edit');
+Route::put('/tag/edit/{tag}', [TagController::class,'update'])->name('tag.update');
+Route::get('/tag/trash', [TagController::class, 'trash'])->name('tag.trash');
+Route::get('/tag/trash/restore/{tag}', [TagController::class,'restore'])->name('tag.restore');
+Route::get('/tag/destroy/{tag}', [TagController::class, 'destroy'])->name('tag.destroy');
+
+});
+

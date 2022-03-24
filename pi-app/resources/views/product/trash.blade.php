@@ -1,9 +1,8 @@
-<div>
-{{ session()->get('success')}}
+@extends('layouts.app')
 
-</div>
+@section('content')
 
-<table>
+<table border = '1'>
 @foreach($products as $product)
 <tr>
 <td>{{$product->id}}</td>
@@ -19,3 +18,4 @@
 </tr>
 @endforeach
 </table>
+@endsection

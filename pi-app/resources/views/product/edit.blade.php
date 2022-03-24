@@ -1,3 +1,7 @@
+@extends('layouts.app')
+
+@section('content')
+
 <form action= "{{route('product.edit', $product->id)}}" method="POST">
     @csrf
     @method("PUT")
@@ -13,6 +17,15 @@
             {{ $category->name}}</option>
         @endforeach
     </select>
+    Selecione uma Tag:
+    <select multiple name="tags[]">
+        @foreach($tags as $tag)
+        <option value="{{$tag->id}}"{{$product->hastag($tag->id) ? 'selected' : ""}}>
+        {{$tag->name}}</option>
+        @endforeach
+    </select>
     <button type="submit">Enviar</button>
 
 </form>
+
+@endsection
