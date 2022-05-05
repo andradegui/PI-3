@@ -50,6 +50,15 @@
                             Lixeira Tags
                         </a>
                     </li>
+                    <li class="ms-auto">
+                        <form method="POST" action="{{ route('logout')}}">
+                            @csrf
+                            <button type="submit">Logout</button>
+
+
+                        </form>
+
+                    </li>
                 </ul>
             </div>
         </nav>

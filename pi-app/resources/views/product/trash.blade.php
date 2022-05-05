@@ -6,6 +6,7 @@
 @foreach($products as $product)
 <tr>
 <td>{{$product->id}}</td>
+<td><img src="{{asset($product->image)}}" style="width:35px;"></td>
 <td>{{$product->name}}</td>
 <td>{{$product->Category->id}}</td>
 <td>{{$product->Category->name}}</td>

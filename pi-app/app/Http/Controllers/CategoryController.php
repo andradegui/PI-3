@@ -43,7 +43,7 @@ class CategoryController extends Controller
     public function destroy(Category $category){
 
         $category->delete();
-        session()->flash('success', 'O produto foi apagado');
+        session()->flash('success', 'A categoria foi apagada');
         return redirect(route('category.index'));
     }
 
@@ -56,7 +56,7 @@ class CategoryController extends Controller
     public function restore($category_id){
         $category = Category::onlyTrashed()->where('id', $category_id)->first();
         $category->restore();
-        session()->flash('success', 'Categoria restaurado com sucesso');
+        session()->flash('success', 'Categoria foi restaurado com sucesso');
         return redirect(route('category.index'));
     }
 }

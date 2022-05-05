@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\eCommerceController;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,21 +18,21 @@ use App\Http\Controllers\TagController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [eCommerceController::class, 'index'])->name('home');
+Route::get('/search/category/{category}', [eCommerceController::class, 'searchCategory'])->name('search-category');
+Route::get('/search/tag/{tag}', [eCommerceController::class, 'searchTag'])->name('search-tag');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+
 
 require __DIR__.'/auth.php';
 
-Route::get('/', function () {
-    return view('welcome');
+Route::middleware(['auth'])->group(function(){
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 });
 
-Route::middleware(['auth'])->group(function(){
+
+
+Route::middleware(['auth', 'admin'])->group(function(){
 Route::get('/product/create', [ProductController::class,'create'])->name('product.create');
 Route::post('/product/create', [ProductController::class,'store'])->name('product.store');
 Route::get('/product/edit/{product}', [ProductController::class,'edit'])->name('product.edit');

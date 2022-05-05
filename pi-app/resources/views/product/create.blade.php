@@ -2,7 +2,7 @@
 
 @section('content')
 
-<form class="container" action= "{{route('product.store')}}" method="POST">
+<form class="container" action= "{{route('product.store')}}" method="POST" enctype="multipart/form-data">
     @csrf
     Nome prod: <input type="text" name="name">
     Descrição: <input type="text" name="description">
@@ -21,6 +21,7 @@
         <option value="{{$tag->id}}">{{$tag->name}}</option>
         @endforeach
     </select>
+    imagem: <input type="file" name="image">
     <button class="btn btn-info" type="submit">Enviar</button>
     </p>
 
